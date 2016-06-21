@@ -2,12 +2,13 @@ import pygame
 from pygame.locals import *
 import guard_station
 import prison_cell
+import time
 
 class PrisonSim:
     def __init__(self):
         self._running = True
         self.screen = None
-        self.size = self.width, self.height = 1025, 700
+        self.size = self.width, self.height = 1200, 700
 
     def on_init(self):
         #Initialize screen
@@ -24,14 +25,15 @@ class PrisonSim:
         cell_panel_heigh = 300
 
         #create the guard station panel with number of cells
-        self.guard_station_panel = guard_station.GuardStation(self, 2, 50, 450)
+        self.guard_station_panel = guard_station.GuardStation(self, 3, 50, 450)
 
         #create each cell at given location
         cell_one_panel = prison_cell.PrisonCell(self, 1, x_padding, y_padding)
         cell_two_panel = prison_cell.PrisonCell(self, 2, 2*x_padding+cell_panel_width, y_padding)
+        cell_three_panel = prison_cell.PrisonCell(self, 3, 3*x_padding+2*cell_panel_width, y_padding)
 
         #add all cells to list
-        self.cell_door_panels = [cell_one_panel, cell_two_panel]
+        self.cell_door_panels = [cell_one_panel, cell_two_panel, cell_three_panel]
 
         pygame.display.update()
         self._running = True
@@ -46,6 +48,12 @@ class PrisonSim:
                     self.cell_door_panels[i].cell_door.change_state()
                     self.cell_door_panels[i].cell_door_indicator.change_state()
                     self.cell_door_panels[i].lock_indicator.change_state()
+                    #time.sleep(2)
+                    #self.cell_door_panels[i].cell_door.change_state()
+                    #time.sleep(2)
+                    #self.cell_door_panels[i].lock_indicator.change_state()
+                    #self.cell_door_panels[i].cell_door_indicator.change_state()
+
             for cell in self.cell_door_panels:
                 if 'click' in cell.key_btn.handleEvent(event):
                     cell.cell_door.change_state()
