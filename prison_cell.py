@@ -6,8 +6,8 @@ import indicator
 
 class PrisonCell:
 
-    def __init__(self, screen=None, font=None, cell_num=0, x=0, y=0, current_state=0):
-        if screen is not None:
+    def __init__(self, sim=None, cell_num=0, x=0, y=0, current_state=0):
+        if sim is not None:
             cell_padding_x = 25
             cell_padding_y = 25
             title_height = 25
@@ -16,6 +16,8 @@ class PrisonCell:
             dark_grey = (140, 140, 140)
             white = (255, 255, 255)
             black = (0,0,0)
+            screen = sim.screen
+            font = sim.font
 
             panel_width = 3*cell_padding_x+100+150
             panel_height = 2*cell_padding_y+250+title_height
@@ -33,7 +35,7 @@ class PrisonCell:
             closed_door_icon = pygame.image.load ("images/closedDoor.png")
             open_door_icon= pygame.image.load ("images/openDoor.png")
             cell_door_icons = [closed_door_icon, open_door_icon]
-            cell_door = indicator.Indicator(screen, cell_door_start_x, cell_door_start_y, cell_door_icons, cell_door_dimensions)
+            self.cell_door = indicator.Indicator(sim, cell_door_start_x, cell_door_start_y, cell_door_icons, cell_door_dimensions)
 
             #Control Panel
             green_icon = pygame.image.load("images/greenLightAlt.png")
@@ -43,7 +45,7 @@ class PrisonCell:
             indicator_start_y = cell_door_start_y
             indicator_icons = [green_icon, red_icon]
             indicator_dimensions = ((75,75))
-            cell_door_indicator = indicator.Indicator(screen, indicator_start_x, indicator_start_y, indicator_icons, indicator_dimensions)
+            self.cell_door_indicator = indicator.Indicator(sim, indicator_start_x, indicator_start_y, indicator_icons, indicator_dimensions)
 
             key_start_x = indicator_start_x
             key_start_y = indicator_start_y+150
@@ -51,5 +53,5 @@ class PrisonCell:
             key_btn_height = 40
             key_btn_text = "Unlock Key"
 
-            key_btn = pygbutton.PygButton((key_start_x, key_start_y, key_btn_width, key_btn_height), key_btn_text)
-            key_btn.draw(screen)
+            self.key_btn = pygbutton.PygButton((key_start_x, key_start_y, key_btn_width, key_btn_height), key_btn_text)
+            self.key_btn.draw(screen)

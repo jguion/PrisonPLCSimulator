@@ -5,8 +5,10 @@ import pygbutton
 
 class GuardStation:
 
-    def __init__(self, screen=None, font=None, num_cells=0, x=0, y=0):
-        if screen is not None:
+    def __init__(self, sim=None, num_cells=0, x=0, y=0):
+        if sim:
+            screen = sim.screen
+            font = sim.font
             self.cell_btns = []
             btn_height = 40;
             btn_width = 100;
