@@ -40,15 +40,26 @@ class PrisonCell:
             #Control Panel
             green_icon = pygame.image.load("images/greenLightAlt.png")
             red_icon = pygame.image.load("images/redLightAlt.png")
+            lock_icon = pygame.image.load("images/locked.png")
+            unlock_icon = pygame.image.load("images/unlocked.png")
 
+            #Door light
             indicator_start_x = x+cell_padding_x
             indicator_start_y = cell_door_start_y
             indicator_icons = [green_icon, red_icon]
-            indicator_dimensions = ((75,75))
+            indicator_dimensions = ((65,75))
             self.cell_door_indicator = indicator.Indicator(sim, indicator_start_x, indicator_start_y, indicator_icons, indicator_dimensions)
 
+            #lock unlock icon
+            lock_start_x = indicator_start_x
+            lock_start_y = cell_door_start_y + 85
+            lock_icons = [lock_icon, unlock_icon]
+            lock_dimensions = ((75,75))
+            self.lock_indicator = indicator.Indicator(sim, lock_start_x, lock_start_y, lock_icons, lock_dimensions, grey)
+
+            #door key
             key_start_x = indicator_start_x
-            key_start_y = indicator_start_y+150
+            key_start_y = lock_start_y+85
             key_btn_width = 90
             key_btn_height = 40
             key_btn_text = "Unlock Key"

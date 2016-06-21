@@ -36,9 +36,6 @@ class GuardStation:
                 button_text = "Cell %s" % cell_num
 
                 cell_btn = pygbutton.PygButton((cell_start_x, cell_start_y, btn_width, btn_height), button_text)
-
-                ## ADD CELL BUTTON CLICK LOGIC HERE HERE
-
                 cell_btn.draw(screen)
 
                 self.cell_btns.append(cell_btn)
